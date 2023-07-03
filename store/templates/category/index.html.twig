@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %} {% block title %}Categories{% endblock %} {%
+block body %}
+<h1>Categories</h1>
+<div class="container">
+  <div class="row my-4">
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success mt-4">
+      {{ message }}
+    </div>
+    {% endfor %}
+    <div>
+      <table class="table">
+            <tr><a href="{{path('app_category_add')}}" class="btn btn-primary">add a Categorie</a></tr>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for categorie in categories %}
+          <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td>{{categorie.name}}</td>
+            <td class=" d-flex ">
+                <a href="{{path('app_category_edit' , {id : categorie.id})}}" class="mx-3 btn btn-primary btn-sm">edit</a>
+                <form id="{{categorie.id}}" action="{{path('app_category_delete' , {id : categorie.id})}}"></form>
+			          <button onclick="deleteItems('{{categorie.id}}')" class=" btn btn-danger btn-sm">remove</button>
+                
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!
+{% endblock %}
+
+{% block body %}
+	<div class=" container mt-5">
+{% for message in app.flashes('success') %}
+			<div class="alert alert-success mt-4">
+				{{ message }}
+			</div>
+		{% endfor %}
+		<div class="jumbotron">
+			<h1 class="display-4">Hello, world!</h1>
+			<p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+			<hr class="my-4">
+			<p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+		</div>
+		<div class="row row-cols-2 row-cols-md-4 g-4 m-5">
+			{% for event in events %}
+
+				<div class="col">
+					<div class="card">
+						<img src="https://www.timeoutdubai.com/cloud/timeoutdubai/2021/09/14/yvA5SpUH-IMG-Worlds-1200x900.jpg" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h3 class="card-title">{{ event.titre }}</h3>
+							<p class="card-text">Description :
+								{{ event.description }}</p>
+							<h5 class="card-text">Participent :{{ event.participent }}</h5>
+							<h5 class="card-text">Date debut on :{{ event.debutAt | date("d/m/Y")}}</h5>
+							<h5 class="card-text">Date la fin on :{{ event.finishAt | date("d/m/Y")}}</h5>
+						</div>
+						<div class="card-footer">
+                        
+							<a class="btn btn-primary" href="{{ path('app_inscription',{ id : event.id}) }}" >
+								s'incrire
+							</a>
+						</div>
+					</div>
+				</div>
+
+			{% endfor %}
+
+		</div>
+
+
+	</div>
+
+
+{% endblock %}
